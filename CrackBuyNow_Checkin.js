@@ -1,4 +1,4 @@
-﻿var _Taobao_is_ie = true;
+ var _Taobao_is_ie = true;
 var _Taobao_layer;
 var _ErrorNum;
 var _intervalProcess;
@@ -14,7 +14,7 @@ function _TaobaoInit() {
 	var agt = navigator.userAgent.toLowerCase();
 	_Taobao_is_ie = (agt.indexOf("msie") != -1 && document.all);
 	var h = '';
-	h += '<div id="_CrackJLPT2010_12">V2.2.8';
+	h += '<div id="_CrackJLPT2010_12">V2.2.9';
 	h += '<div>';
 	h += ' <form id="_book" onsubmit="return false;">';
 	h += '    时间间隔（ms）：<input id="_txtInt" type="text" size="5" value="1000">';
