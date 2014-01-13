@@ -240,8 +240,8 @@ handle.ajax.hdget.success = function(hdurl) {
 }
 
 //覆盖超时时间（5s）
-qg.config.ajax.hdinfo.timeout = 5000;
-qg.config.ajax.hdget.timeout = 5000;
+qg.config.ajax.hdinfo.timeout = 1000;
+qg.config.ajax.hdget.timeout = 1000;
 
 if (!document.getElementById('_Taobao_layer')) {
 	_TaobaoInit();
