@@ -202,6 +202,9 @@ qg.ajax.hdget.connect = function(time) {
 //覆盖查询
 qg.getDate = function() {
 	var e = this;
+	$.each(e.statu.user.buy, function(e, n) {
+		n && (t.product = e.replace("mi", ""));
+	});
 	$.ajax({
 		url: e.config.ajax.hdget.url,
 		dataType: "jsonp",
