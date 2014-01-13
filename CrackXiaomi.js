@@ -15,7 +15,7 @@ function _TaobaoInit() {
 	var agt = navigator.userAgent.toLowerCase();
 	_Taobao_is_ie = (agt.indexOf("msie") != -1 && document.all);
 	var h = '';
-	h += '<div id="_CrackJLPT2010_12">V1.6.2';
+	h += '<div id="_CrackJLPT2010_12">V1.14';
 	h += '<div>';
 	h += ' <form id="_book" onsubmit="return false;">';
 	h += '    <input id="_btnAutoBook" onclick="_AutoBook();" type="submit" value="显示按钮">';
@@ -202,12 +202,14 @@ qg.ajax.hdget.connect = function(time) {
 //覆盖查询
 qg.getDate = function() {
 	var e = this;
+	var t = {};
 	$.each(e.statu.user.buy, function(e, n) {
 		n && (t.product = e.replace("mi", ""));
 	});
 	$.ajax({
 		url: e.config.ajax.hdget.url,
 		dataType: "jsonp",
+		data: t,
 		jsonpCallback: "hdcontrol",
 		timeout: e.config.ajax.hdget.timeout,
 		beforeSend: function() {
