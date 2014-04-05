@@ -9,12 +9,13 @@ var _itemInfo;
 var _skus = new Array();
 var _Mobile = ['15852533530', '15861560851', '13952486169', '13921276890', '13861822380', '13115090060', '13812066705', '13771512659', '15995231386', '13951502886', '13921158152', '15251639389', '13921150279', '13057235888', '15951518440', '18951509190', '15961799765', '13861716234', '13921173573', '15951581853', '18626051561', '13813695469', '15061508667', '13616197589', '15061796673', '18961880751', '13961703677', '13585079941', '13961750827', '13706197204', '13814275374', '13952478883', '18601570984', '18626371347', '15301518335', '13182790062', '13057287250', '13961883595', '13815104120', '15190324231'];
 var _index = 0;
+var CH_ID = _GetSearch('ch_id');
 
 function _TaobaoInit() {
 	var agt = navigator.userAgent.toLowerCase();
 	_Taobao_is_ie = (agt.indexOf("msie") != -1 && document.all);
 	var h = '';
-	h += '<div id="_CrackJLPT2010_12">V2.2.10';
+	h += '<div id="_CrackJLPT2010_12">V2.3.0';
 	h += '<div>';
 	h += ' <form id="_book" onsubmit="return false;">';
 	h += '    时间间隔（ms）：<input id="_txtInt" type="text" size="5" value="1000">';
@@ -69,7 +70,7 @@ function _TaobaoInit() {
 
 function _ShowError(str) {
 	if (str) {
-		document.getElementById("_errorMsg").innerHTML += str;
+		document.getElementById("_errorMsg").innerHTML += str + '<br />';
 	} else {
 		document.getElementById("_errorMsg").innerHTML = '';
 	}
@@ -135,7 +136,7 @@ function _BookCheck() {
 	var mobile = _Mobile[_index];
 	mobile = (mobile + '00000000000').substr(0, 11);
 	document.getElementById("_txtMobile").value = mobile;
-	Ajax.call('checkin.php?mod=show', 'act=checkin&ch_id=79&mobile=' + mobile, function(result) {
+	Ajax.call('checkin.php?mod=show', 'act=checkin&ch_id=' + CH_ID + '&mobile=' + mobile, function(result) {
 		if (result == '-5' || result == '-6') {
 			//今天已签到过
 			_ShowMsg(mobile + '：已经签过到了');
@@ -181,7 +182,7 @@ function _BookCheck() {
 				if (result == '1') {
 					var goods = document.getElementById(kvip + 'goods1').value;
 					var message_module = message_module1;
-					Ajax.call('checkin.php?mod=show', 'act=send_message&ch_id=79&mobile=' + mobile, function(result) {
+					Ajax.call('checkin.php?mod=show', 'act=send_message&ch_id=' + CH_ID + '&mobile=' + mobile, function(result) {
 						if (result == 1) {
 							_ShowMsg(mobile + ":发送短信成功");
 						} else {
@@ -191,7 +192,7 @@ function _BookCheck() {
 				} else if (result == '2') {
 					var goods = document.getElementById(kvip + 'goods2').value;
 					var message_module = message_module2;
-					Ajax.call('checkin.php?mod=show', 'act=send_message&ch_id=79&mobile=' + mobile, function(result) {
+					Ajax.call('checkin.php?mod=show', 'act=send_message&ch_id=' + CH_ID + '&mobile=' + mobile, function(result) {
 						if (result == 1) {
 							_ShowMsg(mobile + ":发送短信成功");
 						} else {
@@ -201,7 +202,7 @@ function _BookCheck() {
 				} else if (result == '3') {
 					var goods = document.getElementById(kvip + 'goods3').value;
 					var message_module = message_module3;
-					Ajax.call('checkin.php?mod=show', 'act=send_message&ch_id=79&mobile=' + mobile, function(result) {
+					Ajax.call('checkin.php?mod=show', 'act=send_message&ch_id=' + CH_ID + '&mobile=' + mobile, function(result) {
 						if (result == 1) {
 							_ShowMsg(mobile + ":发送短信成功");
 						} else {
@@ -238,6 +239,19 @@ function _AutoBook() {
 	clearInterval(_intervalProcess);
 	_intervalProcess = setInterval(_BookCheck, intTime);
 	_BookCheck();
+	_GetSearch('ch_id');
+}
+
+function _GetSearch( id ){
+	var url = window.location.search;
+	var searches = [];
+	if(url.indexOf('?') >= 0){ 
+		var strs = url.substr(1).split('&'); //去掉?号  
+		for(var i = 0; i < strs.length; i++){ 
+			searches[ strs[i].split('=')[0] ] = decodeURIComponent( strs[i].split('=')[1] ); 
+		}
+	}
+	return searches[id];
 }
 
 function _TaobaoSet(el, htmlCode) {

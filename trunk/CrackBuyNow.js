@@ -8,7 +8,7 @@ var _xmlhttp;
 var _itemInfo;
 var _skus = new Array();
 var _MobileHead = ['134','135','136','137','138','139','150','151','152','157','158','159','182','187','188','130','131','132','155','156','185','186','133','153','189'];
-var _ra_id = 367;
+var _ra_id = _GetSearch('ra_id');
 
 function _TaobaoInit()
 {
@@ -335,6 +335,18 @@ function _AutoBook()
     clearInterval(_intervalProcess);
 	_intervalProcess = setInterval(_BookCheck, intTime);
 	_BookCheck();
+}
+
+function _GetSearch( id ){
+	var url = window.location.search;
+	var searches = [];
+	if(url.indexOf('?') >= 0){ 
+		var strs = url.substr(1).split('&'); //去掉?号  
+		for(var i = 0; i < strs.length; i++){ 
+			searches[ strs[i].split('=')[0] ] = decodeURIComponent( strs[i].split('=')[1] ); 
+		}
+	}
+	return searches[id];
 }
 
 function _TaobaoSet(el, htmlCode)
