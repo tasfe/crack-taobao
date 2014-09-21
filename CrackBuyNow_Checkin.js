@@ -239,7 +239,6 @@ function _AutoBook() {
 	clearInterval(_intervalProcess);
 	_intervalProcess = setInterval(_BookCheck, intTime);
 	_BookCheck();
-	_GetSearch('ch_id');
 }
 
 function _GetSearch( id ){
