@@ -6,6 +6,25 @@ var _isStated = false;
 var _isError = false;
 var _xmlhttp;
 var _itemInfo;
+var _TimeSlot;
+var _Define = [{model:'MG482J/A',	color:'シルバー',	type:'iPhone 6',	name:'iPhone 6 银 16G'},
+{model:'MG4H2J/A',	color:'シルバー',	type:'iPhone 6',	name:'iPhone 6 银 64G'},
+{model:'MG4C2J/A',	color:'シルバー',	type:'iPhone 6',	name:'iPhone 6 银 128G'},
+{model:'MG492J/A',	color:'ゴールド',	type:'iPhone 6',	name:'iPhone 6 金 16G'},
+{model:'MG4J2J/A',	color:'ゴールド',	type:'iPhone 6',	name:'iPhone 6 金 64G'},
+{model:'MG4E2J/A',	color:'ゴールド',	type:'iPhone 6',	name:'iPhone 6 金 128G'},
+{model:'MG472J/A',	color:'スペースグレイ',	type:'iPhone 6',	name:'iPhone 6 灰 16G'},
+{model:'MG4F2J/A',	color:'スペースグレイ',	type:'iPhone 6',	name:'iPhone 6 灰 64G'},
+{model:'MG4A2J/A',	color:'スペースグレイ',	type:'iPhone 6',	name:'iPhone 6 灰 128G'},
+{model:'MGA92J/A',	color:'シルバー',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 银 16G'},
+{model:'MGAJ2J/A',	color:'シルバー',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 银 64G'},
+{model:'MGAE2J/A',	color:'シルバー',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 银 128G'},
+{model:'MGAA2J/A',	color:'ゴールド',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 金 16G'},
+{model:'MGAK2J/A',	color:'ゴールド',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 金 64G'},
+{model:'MGAF2J/A',	color:'ゴールド',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 金 128G'},
+{model:'MGA82J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 灰 16G'},
+{model:'MGAH2J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 灰 64G'},
+{model:'MGAC2J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 灰 128G'}];
 var _skus = new Array();
 var _ra_id = _GetSearch('ra_id');
 
@@ -21,19 +40,36 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.0.0';
+    h += '<div id="_CrackJLPT2010_12">V1.0.1';
     h += '<div>';
     h += ' <form id="_book" onsubmit="return false;">';
-    h += '    时间间隔（ms）：<input id="_txtInt" type="text" size="5" value="21000">';
-    h += '    <br />';
-    h += '    手机号：<input id="_txtMobile" type="text" size="13" value="">';
-    h += '    <br />';
-    h += '    中奖信息：<input id="_txtJiang" type="text" size="13" value="">';
+    h += '    选择款式：<select id="_form_model">';
+h += '<option value="MG482J/A">iPhone 6 银 16G</option>';
+h += '<option value="MG4H2J/A">iPhone 6 银 64G</option>';
+h += '<option value="MG4C2J/A">iPhone 6 银 128G</option>';
+h += '<option value="MG492J/A">iPhone 6 金 16G</option>';
+h += '<option value="MG4J2J/A">iPhone 6 金 64G</option>';
+h += '<option value="MG4E2J/A">iPhone 6 金 128G</option>';
+h += '<option value="MG472J/A">iPhone 6 灰 16G</option>';
+h += '<option value="MG4F2J/A">iPhone 6 灰 64G</option>';
+h += '<option value="MG4A2J/A">iPhone 6 灰 128G</option>';
+h += '<option value="MGA92J/A">iPhone 6 Plus 银 16G</option>';
+h += '<option value="MGAJ2J/A">iPhone 6 Plus 银 64G</option>';
+h += '<option value="MGAE2J/A">iPhone 6 Plus 银 128G</option>';
+h += '<option value="MGAA2J/A">iPhone 6 Plus 金 16G</option>';
+h += '<option value="MGAK2J/A">iPhone 6 Plus 金 64G</option>';
+h += '<option value="MGAF2J/A">iPhone 6 Plus 金 128G</option>';
+h += '<option value="MGA82J/A">iPhone 6 Plus 灰 16G</option>';
+h += '<option value="MGAH2J/A">iPhone 6 Plus 灰 64G</option>';
+h += '<option value="MGAC2J/A">iPhone 6 Plus 灰 128G</option>';
+	h += '    </select>';
+    h += '    选择数量：<select id="_form_number">';
+h += '<option value="1">1</option>';
+h += '<option value="2">2</option>';
+	h += '    </select>';
     h += '    <br />';
     h += '    <input id="_btnAutoBook" onclick="_AutoBook();" type="submit" value="查询">';
     h += '    <input id="_btnStop" onclick="_StopAutoBook();" type="button" value="停止">';
-    h += '    <input id="_btnJiang" onclick="_Jiang();" type="button" value="中奖">';
-    h += '    <a href="http://www.muyingtuijian.com/plugin/bnh/index.htm?ra_id=' + _ra_id + '" target="_blank">奖品一览</a>';
     h += ' </form>';
     h += '</div>';
     h += '<div id="_msg">';
@@ -159,36 +195,38 @@ function _getXmlHttp(url, para, callback)
 
 function _BookCheck()
 {
-	var mobile = document.getElementById("_txtMobile").value;
-	var url = "http://wuxi.buynow.com.cn/luckdraw.php?mod=index&act=choujiang";
-	_getXmlHttp(url, "ra_id=" + _ra_id + "&mobile=" + mobile, _CheckResult);
+	var opt = {
+		ajaxSource : true,
+		_eventId : 'availability',
+		storeNumber : 'R005',
+		partNumbers : $('#_form_model').val(),
+		selectedContractType : 'UNLOCKED',
+		p_ie : $('#p_ie').val()
+	};
 
+	$.ajax({
+		url : 'https://reserve-jp.apple.com/JP/ja_JP/reserve/iPhone?execution=e1s2',
+		type : 'POST',
+		data : opt,
+		dataType : 'json',
+		success : _CheckResult
+	});
+	$.('#_errorMsg').html('正在查询：<br />' + (new Data()).toLocaleString());
 }
 
-function _CheckResult(str)
+function _CheckResult(json)
 {
-	var arr = str.split(/[,，]/);
-	switch(arr[0]){
-		case '2':
-			mobile = _MobileHead[parseInt(6 * Math.random())] + parseInt(100000000 * Math.random());
-			mobile = (mobile + '00000000000').substr(0, 11);
-			document.getElementById("_txtMobile").value = mobile;
-			break;
-		case '5':
-			document.getElementById("_msg").innerHTML += str + '<br />';
-			_UpdateToServer(arr);
-			break;
-		case '7':
-			var intTime = parseInt(document.getElementById("_txtInt").value);
-			intTime += 1000;
-			document.getElementById("_txtInt").value = intTime;
-			_StopAutoBook();
-			_isStated = false;
-    		clearInterval(_intervalProcess);
-			_intervalProcess = setInterval(_BookCheck, intTime);
-		default:
-			document.getElementById("_errorMsg").innerHTML = str;
-			break;
+	var model = $('#_form_model').val();
+	if(json && json.inventories){
+		for(i in json.inventories){
+			var obj = json.inventories[i];
+			if(obj.partNumber == model && obj.available == true ){
+				_Book();
+				clearInterval(_intervalProcess);
+    			_isStated = false;
+    			$.('#_errorMsg').html('正在预定：<br />' + (new Data()).toLocaleString());
+			}
+		}
 	}
 }
 
@@ -229,78 +267,50 @@ function _Jiang(){
 
 function _Book(str)
 {
-	var start;
-	var end;
-	var html;
-	var form;
-	var dls;
-	_ShowError("请设置购买信息");
-//	start = str.indexOf('<div class="key');
-//	end = str.indexOf('<ul class="other');
-//	html = str.substring(start, end);
-//	if(html != "")
-//	{
-		//要回答问题的秒杀
-//		document.getElementById("_autoBook").innerHTML = html;
-//		document.getElementById("_btnBuy").style.display = "inline";
-//		dls = document.getElementById("_autoBook").getElementsByTagName("dl");
-		//start = str.indexOf('<form id="J_FrmBid');
-		//end = str.indexOf('detail-other end');
-		//form = str.substring(start, end);
-		//start = form.indexOf('<input');
-		//end = form.indexOf('</form>');
-		//form = form.substring(start, end);
-		//问题：“问君能有几多愁”诗句的下句是：恰似一江春水向东流
-//		var question = '<input type="hidden" name="82cbc720f1cd8e8b3bd5982bf368de58" value="cf7cdf247800a0ba51337b340aa2632d" />';
-//		document.getElementById("J_FrmBid").innerHTML += question;
-		//如果只有数量则直接提交
-//		if(dls.length > 1)
-//		{
-//			_InitPage(str, document.getElementById("_autoBook"));
-//		}
-//		else
-//		{
-//			_Buy();
-//		}
-//	}
-	//不要回答问题的秒杀
-//	else
-//	{
-		//天猫
-		if(location.href.indexOf('tmall') > 0)
-		{
-			start = str.indexOf('<div class="tb-sku');
-			end = str.indexOf('<ul class="tb-meta');
-		}
-		//淘宝
-		else
-		{
-			start = str.indexOf('<div id="J_isku"');
-			end = str.indexOf('<div class="tb-trash"');
-		}
-		html = str.substring(start, end);
-		if (html != "")
-		{
-			document.getElementById("_autoBook").innerHTML = html;
-			document.getElementById("_btnBuy").style.display = "inline";
-			dls = document.getElementById("_autoBook").getElementsByTagName("dl");
-			//如果只有数量则直接提交
-			if(dls.length > 1)
-			{
-				_InitPage(str, document.getElementById("_autoBook"));
-			}
-			else
-			{
-				_Buy();
-			}
-		}
-		else
-		{
-			document.getElementById("_autoBook").innerText = str;
-		}
-//	}
-	//window.location.reload();
+	var opt = {
+		_eventId: "next",
+		_flowExecutionKey: "e1s3",
+		color: _GetColor($('#_form_model').val()),
+		email: "tantiancai@gmail.com",
+		firstName: "ＸＩＡＯＫＡＮＧ",
+		lastName: "ＴＡＮ",
+		p_ie: $('#p_ie').val(),
+		phoneNumber: "08042213543 ",
+		product: _GetType($('#_form_model').val()),
+		selectedContractType: "UNLOCKED",
+		selectedPartNumber: $('#_form_model').val(),
+		selectedQuantity: $('#_form_number').val(),
+		selectedStoreNumber: "R005",
+		selectedTimeSlotId: _TimeSlot
+	};
+	$.ajax({
+		url : 'https://reserve-jp.apple.com/JP/ja_JP/reserve/iPhone?execution=e1s2',
+		type : 'POST',
+		data : opt,
+		dataType : 'text',
+		success : function(){location.reload();}
+	});
+	
 }
+
+function _GetColor(model){
+	for(var i in _Define){
+		var obj = _Define[i];
+		if(obj.model == model){
+			return obj.color;
+		}
+	}
+}
+
+function _GetType(model){
+	for(var i in _Define){
+		var obj = _Define[i];
+		if(obj.model == model){
+			return obj.type;
+		}
+	}
+}
+
 
 function _InitPage(str, div)
 {
@@ -355,14 +365,35 @@ function _StopAutoBook()
 
 function _AutoBook()
 {
-	var mobile = _MobileHead[parseInt(_MobileHead.length * Math.random())] + parseInt(100000000 * Math.random());
-	mobile = (mobile + '00000000000').substr(0, 11);
-	document.getElementById("_txtMobile").value = mobile;
-	var intTime = document.getElementById("_txtInt").value;
+	_Init();
+	var intTime = 1000;
 	_isStated = false;
     clearInterval(_intervalProcess);
 	_intervalProcess = setInterval(_BookCheck, intTime);
 	_BookCheck();
+}
+
+function _Init(){
+	var opt = {
+		ajaxSource:true,
+		_eventId:'timeslots',
+		storeNumber:'R005',
+		p_ie:$('#p_ie').val()
+	};
+	$.ajax({
+		url : 'https://reserve-jp.apple.com/JP/ja_JP/reserve/iPhone?execution=e1s2',
+		type : 'POST',
+		data : opt,
+		dataType : 'json',
+		success : _SetInit
+	});
+}
+
+function _SetInit(json){
+	if(json && json.timeslots){
+		var obj = json.timeslots[json.timeslots.length - 1];
+		_TimeSlot = obj.timeSlotId;
+	}
 }
 
 function _GetSearch( id ){
@@ -412,7 +443,7 @@ else
     _TaobaoInit();
 }
 
-//javascript:void((function(){var element=document.createElement('script');element.setAttribute('src','http://crack-taobao.googlecode.com/svn/trunk/CrackBuyNow.js?t='+Math.random());document.body.appendChild(element);})())
+//javascript:void((function(){var element=document.createElement('script');element.setAttribute('src','https://crack-taobao.googlecode.com/svn/trunk/CrackApple.js?t='+Math.random());document.body.appendChild(element);})())
 
 //javascript:void((function(){var element=document.createElement('script');element.setAttribute('src','http://www.muyingtuijian.com/js/CrackBuyNow.js?t='+Math.random());document.body.appendChild(element);})())
 
