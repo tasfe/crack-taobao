@@ -40,7 +40,7 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.1.1';
+    h += '<div id="_CrackJLPT2010_12">V1.2.0';
     h += '<div>';
     h += ' <form id="_book" onsubmit="return false;">';
     h += '    选择款式：<select id="_form_model">';
@@ -283,13 +283,24 @@ function _Book(str)
 		selectedStoreNumber: "R005",
 		selectedTimeSlotId: _TimeSlot
 	};
-	$.ajax({
-		url : 'https://reserve-jp.apple.com/JP/ja_JP/reserve/iPhone?execution=e1s2',
-		type : 'POST',
-		data : opt,
-		dataType : 'text',
-		success : function(){location.reload();}
-	});
+
+	var form = $("#productSelection");
+	form.find('input[name=_eventId]').val(opt._eventId);
+	form.find('input[name=_flowExecutionKey]').val(opt._flowExecutionKey);
+	form.find('input[name=color][value=' + opt.color + ']').attr('checked',true);
+	form.find('input[name=email]').val(opt.email);
+	form.find('input[name=firstName]').val(opt.firstName);
+	form.find('input[name=lastName]').val(opt.lastName);
+	form.find('input[name=p_ie]').val(opt.p_ie);
+	form.find('input[name=phoneNumber]').val(opt.phoneNumber);
+	form.find('input[name=product][value=' + opt.product + ']').attr('checked',true);
+	form.find('input[name=selectedContractType][value=' + opt.selectedContractType + ']').attr('checked',true);
+	form.find('input[name=selectedPartNumber][value=' + opt.selectedPartNumber + ']').attr('checked',true);
+	form.find('select[name=selectedQuantity]').val(opt.selectedQuantity);
+	form.find('select[name=selectedStoreNumber]').val(opt.selectedStoreNumber);
+	form.find('select[name=selectedTimeSlotId]').val(opt.selectedTimeSlotId);
+	
+	form.submit();
 	
 }
 
@@ -375,7 +386,7 @@ function _StopAutoBook()
 function _AutoBook()
 {
 	_Init();
-	var intTime = 5000;
+	var intTime = 2000;
 	_isStated = false;
     clearInterval(_intervalProcess);
 	_intervalProcess = setInterval(_BookCheck, intTime);
