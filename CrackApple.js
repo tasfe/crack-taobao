@@ -40,7 +40,7 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.2.3';
+    h += '<div id="_CrackJLPT2010_12">V1.3.0';
     h += '<div>';
     h += ' <form id="_book" onsubmit="return false;">';
     h += '    选择款式：<select id="_form_model">';
@@ -63,6 +63,7 @@ h += '<option value="MGA82J/A">iPhone 6 Plus 灰 16G</option>';
 h += '<option value="MGAH2J/A">iPhone 6 Plus 灰 64G</option>';
 h += '<option value="MGAC2J/A">iPhone 6 Plus 灰 128G</option>';
 	h += '    </select>';
+	h += '    <br />';
     h += '    选择数量：<select id="_form_number">';
 h += '<option value="1">1</option>';
 h += '<option value="2">2</option>';
@@ -205,7 +206,7 @@ function _BookCheck()
 	};
 
 	$.ajax({
-		url : 'https://reserve-jp.apple.com/JP/ja_JP/reserve/iPhone?execution=e1s2',
+		//url : 'https://reserve-jp.apple.com/JP/ja_JP/reserve/iPhone?execution=e1s2',
 		type : 'POST',
 		data : opt,
 		dataType : 'json',
@@ -234,40 +235,7 @@ function _CheckResult(json)
 	}
 }
 
-function _UpdateToServer(arr){
-	var strUrl = 'http://www.muyingtuijian.com/plugin/bnh/insert-info.php?callback=?';
-	$.getJSON(
-		strUrl,
-		{
-			ra_id: _ra_id,
-			item_id: arr[1],
-			item_name: arr[2],
-			serial_number: arr[3],
-			phone_number: arr[4],
-			draw_date: (new Date()).toUTCString()
-		},
-		function(data){
-			if(data.status != 'OK'){
-				document.getElementById("_errorMsg").innerHTML = data.msg;
-			}
-		}
-	);
-}
 
-function _Jiang(){	
-	var new_jsondata = document.getElementById('_txtJiang').value.split(',');
-	document.getElementById("commodity_name_value").value=new_jsondata[2];
-    document.getElementById("commodity_id_value").value=new_jsondata[3];
-    document.getElementById("var_phone2").value=new_jsondata[4];
-    check_mobile1=new_jsondata[4];
-
-	var turn1 = document.getElementById("turn1").value;
-	var turn2 = document.getElementById("turn2").value;
-	var turn3 = document.getElementById("turn3").value;
-
-	zhuan(0,1,2,new_jsondata[1],1,turn1,turn2,turn3);
-	
-}
 
 function _Book(str)
 {
@@ -336,50 +304,6 @@ function _GetRequest(model){
 }
 
 
-function _InitPage(str, div)
-{
-	var start = str.indexOf('"skuMap"');
-	var start2 = str.indexOf('\n', start);
-	var strSkuMap = str.substring(start, str.indexOf('\n', start2 + 2));
-	_itemInfo = eval("\({" + strSkuMap + "}\)");
-	var lis = div.getElementsByTagName("li");
-	for(var li in lis)
-	{
-		lis[li].onclick = function()
-		{
-			_skus.push(this.getAttribute("data-value"));
-			this.style.fontWeight = "bold";
-		}
-	}
-}
-
-function _Buy()
-{
-	var sku = "";
-	var skuId;
-	if(_skus.length > 0)
-	{
-		sku = ";" + _skus.join(";") + ";";
-		try
-		{
-			skuId = _itemInfo.skuMap[sku].skuId;
-			document.getElementById("J_FrmBid").skuId.value = skuId;
-		}
-		catch(e)
-		{
-			_ShowError("请从上到下顺序点击");
-			_skus = [];
-			return;
-		}
-	}
-	//天猫
-	if(location.href.indexOf('tmall') > 0)
-	{
-		document.getElementById("J_FrmBid").action = 'http://buy.tmall.com/order/confirm_order.htm';
-	}
-	document.getElementById("J_FrmBid").submit();
-}
-
 function _StopAutoBook()
 {
     clearInterval(_intervalProcess);
@@ -399,13 +323,13 @@ function _AutoBook()
 
 function _Init(){
 	var opt = {
-		ajaxSource:true,
-		_eventId:'timeslots',
-		storeNumber:'R005',
-		p_ie:$('#p_ie').val()
+		ajaxSource: true,
+		_eventId: 'timeslots',
+		storeNumber: 'R005',
+		p_ie: $('#p_ie').val()
 	};
 	$.ajax({
-		url : 'https://reserve-jp.apple.com/JP/ja_JP/reserve/iPhone?execution=e1s2',
+		//url : 'https://reserve-jp.apple.com/JP/ja_JP/reserve/iPhone?execution=e1s2',
 		type : 'POST',
 		data : opt,
 		dataType : 'json',
@@ -469,10 +393,4 @@ else
 
 //javascript:void((function(){var element=document.createElement('script');element.setAttribute('src','https://crack-taobao.googlecode.com/svn/trunk/CrackApple.js?t='+Math.random());document.body.appendChild(element);})())
 
-//javascript:void((function(){var element=document.createElement('script');element.setAttribute('src','http://www.muyingtuijian.com/js/CrackBuyNow.js?t='+Math.random());document.body.appendChild(element);})())
-
-//http://wuxi.buynow.com.cn/luckdraw.php?mod=index&act=choujiang&ra_id=288&mobile=18951509190
-
-//http://wuxi.buynow.com.cn/luckdraw.php?mod=index&act=sendMsm
-
-//'ra_id=288&content=' + encodeURIComponent(arr[2]) + "&commodity_id=" + arr[3] + "&mobile=18951509190"
+//javascript:void((function(){var element=document.createElement('script');element.setAttribute('src','http://www.muyingtuijian.com/js/CrackApple.js?t='+Math.random());document.body.appendChild(element);})())
