@@ -241,7 +241,7 @@ function _Book(str)
 {
 	var opt = {
 		_eventId: "next",
-		_flowExecutionKey: "e1s3",
+		_flowExecutionKey: _GetSearch('execution'),
 		color: _GetColor($('#_form_model').val()),
 		email: "tantiancai@gmail.com",
 		firstName: "ＸＩＡＯＫＡＮＧ",
