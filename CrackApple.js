@@ -366,7 +366,7 @@ function _StopAutoBook()
 function _AutoBook()
 {
 	_Init();
-	var intTime = 1000;
+	var intTime = 10000;
 	_isStated = false;
     clearInterval(_intervalProcess);
 	_intervalProcess = setInterval(_BookCheck, intTime);
