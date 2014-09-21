@@ -7,7 +7,6 @@ var _isError = false;
 var _xmlhttp;
 var _itemInfo;
 var _skus = new Array();
-var _MobileHead = ['134','135','136','137','138','139','150','151','152','157','158','159','182','187','188','130','131','132','155','156','185','186','133','153','189'];
 var _ra_id = _GetSearch('ra_id');
 
 function _TaobaoInit()
@@ -22,7 +21,7 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V3.0.2';
+    h += '<div id="_CrackJLPT2010_12">V1.0.0';
     h += '<div>';
     h += ' <form id="_book" onsubmit="return false;">';
     h += '    时间间隔（ms）：<input id="_txtInt" type="text" size="5" value="21000">';
