@@ -7,24 +7,24 @@ var _isError = false;
 var _xmlhttp;
 var _itemInfo;
 var _TimeSlot;
-var _Define = [{model:'MG482J/A',	color:'シルバー',	type:'iPhone 6',	name:'iPhone 6 银 16G'},
-{model:'MG4H2J/A',	color:'シルバー',	type:'iPhone 6',	name:'iPhone 6 银 64G'},
-{model:'MG4C2J/A',	color:'シルバー',	type:'iPhone 6',	name:'iPhone 6 银 128G'},
-{model:'MG492J/A',	color:'ゴールド',	type:'iPhone 6',	name:'iPhone 6 金 16G'},
-{model:'MG4J2J/A',	color:'ゴールド',	type:'iPhone 6',	name:'iPhone 6 金 64G'},
-{model:'MG4E2J/A',	color:'ゴールド',	type:'iPhone 6',	name:'iPhone 6 金 128G'},
-{model:'MG472J/A',	color:'スペースグレイ',	type:'iPhone 6',	name:'iPhone 6 灰 16G'},
-{model:'MG4F2J/A',	color:'スペースグレイ',	type:'iPhone 6',	name:'iPhone 6 灰 64G'},
-{model:'MG4A2J/A',	color:'スペースグレイ',	type:'iPhone 6',	name:'iPhone 6 灰 128G'},
-{model:'MGA92J/A',	color:'シルバー',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 银 16G'},
-{model:'MGAJ2J/A',	color:'シルバー',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 银 64G'},
-{model:'MGAE2J/A',	color:'シルバー',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 银 128G'},
-{model:'MGAA2J/A',	color:'ゴールド',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 金 16G'},
-{model:'MGAK2J/A',	color:'ゴールド',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 金 64G'},
-{model:'MGAF2J/A',	color:'ゴールド',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 金 128G'},
-{model:'MGA82J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 灰 16G'},
-{model:'MGAH2J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 灰 64G'},
-{model:'MGAC2J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	name:'iPhone 6 Plus 灰 128G'}];
+var _Define = [{model:'MG482J/A',	color:'シルバー',	type:'iPhone 6',	request:'MG482J/A,MG4C2J/A,MG4H2J/A'},
+{model:'MG4H2J/A',	color:'シルバー',	type:'iPhone 6',	request:'MG482J/A,MG4C2J/A,MG4H2J/A'},
+{model:'MG4C2J/A',	color:'シルバー',	type:'iPhone 6',	request:'MG482J/A,MG4C2J/A,MG4H2J/A'},
+{model:'MG492J/A',	color:'ゴールド',	type:'iPhone 6',	request:'MG4J2J/A,MG492J/A,MG4E2J/A'},
+{model:'MG4J2J/A',	color:'ゴールド',	type:'iPhone 6',	request:'MG4J2J/A,MG492J/A,MG4E2J/A'},
+{model:'MG4E2J/A',	color:'ゴールド',	type:'iPhone 6',	request:'MG4J2J/A,MG492J/A,MG4E2J/A'},
+{model:'MG472J/A',	color:'スペースグレイ',	type:'iPhone 6',	request:'MG472J/A,MG4A2J/A,MG4F2J/A'},
+{model:'MG4F2J/A',	color:'スペースグレイ',	type:'iPhone 6',	request:'MG472J/A,MG4A2J/A,MG4F2J/A'},
+{model:'MG4A2J/A',	color:'スペースグレイ',	type:'iPhone 6',	request:'MG472J/A,MG4A2J/A,MG4F2J/A'},
+{model:'MGA92J/A',	color:'シルバー',	type:'iPhone 6 Plus',	request:'MGAE2J/A,MGAJ2J/A,MGA92J/A'},
+{model:'MGAJ2J/A',	color:'シルバー',	type:'iPhone 6 Plus',	request:'MGAE2J/A,MGAJ2J/A,MGA92J/A'},
+{model:'MGAE2J/A',	color:'シルバー',	type:'iPhone 6 Plus',	request:'MGAE2J/A,MGAJ2J/A,MGA92J/A'},
+{model:'MGAA2J/A',	color:'ゴールド',	type:'iPhone 6 Plus',	request:'MGAK2J/A,MGAF2J/A,MGAA2J/A'},
+{model:'MGAK2J/A',	color:'ゴールド',	type:'iPhone 6 Plus',	request:'MGAK2J/A,MGAF2J/A,MGAA2J/A'},
+{model:'MGAF2J/A',	color:'ゴールド',	type:'iPhone 6 Plus',	request:'MGAK2J/A,MGAF2J/A,MGAA2J/A'},
+{model:'MGA82J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	request:'MGAH2J/A,MGAC2J/A,MGA82J/A'},
+{model:'MGAH2J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	request:'MGAH2J/A,MGAC2J/A,MGA82J/A'},
+{model:'MGAC2J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	request:'MGAH2J/A,MGAC2J/A,MGA82J/A'}];
 var _skus = new Array();
 var _ra_id = _GetSearch('ra_id');
 
@@ -40,7 +40,7 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.0.4';
+    h += '<div id="_CrackJLPT2010_12">V1.1.0';
     h += '<div>';
     h += ' <form id="_book" onsubmit="return false;">';
     h += '    选择款式：<select id="_form_model">';
@@ -102,7 +102,7 @@ h += '<option value="2">2</option>';
 		        y: window.pageYOffset | document.documentElement.scrollTop | document.body.scrollTop
 	        };
             document.getElementById("_Taobao_layer").style.left = scrollPos.x + 10 + 'px';
-            document.getElementById("_Taobao_layer").style.top = scrollPos.y + 30 + 'px';
+            document.getElementById("_Taobao_layer").style.top = scrollPos.y + 100 + 'px';
         };
     }
     catch(x)
@@ -199,7 +199,7 @@ function _BookCheck()
 		ajaxSource : true,
 		_eventId : 'availability',
 		storeNumber : 'R005',
-		partNumbers : $('#_form_model').val(),
+		partNumbers : _GetRequest($('#_form_model').val()),
 		selectedContractType : 'UNLOCKED',
 		p_ie : $('#p_ie').val()
 	};
@@ -307,6 +307,15 @@ function _GetType(model){
 		var obj = _Define[i];
 		if(obj.model == model){
 			return obj.type;
+		}
+	}
+}
+
+function _GetRequest(model){
+	for(var i in _Define){
+		var obj = _Define[i];
+		if(obj.model == model){
+			return obj.request;
 		}
 	}
 }
