@@ -40,7 +40,7 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.0.1';
+    h += '<div id="_CrackJLPT2010_12">V1.0.2';
     h += '<div>';
     h += ' <form id="_book" onsubmit="return false;">';
     h += '    选择款式：<select id="_form_model">';
@@ -211,7 +211,7 @@ function _BookCheck()
 		dataType : 'json',
 		success : _CheckResult
 	});
-	$.('#_errorMsg').html('正在查询：<br />' + (new Data()).toLocaleString());
+	$.('#_errorMsg').html('正在查询：<br />' + (new Date()).toLocaleString());
 }
 
 function _CheckResult(json)
@@ -224,7 +224,7 @@ function _CheckResult(json)
 				_Book();
 				clearInterval(_intervalProcess);
     			_isStated = false;
-    			$.('#_errorMsg').html('正在预定：<br />' + (new Data()).toLocaleString());
+    			$.('#_errorMsg').html('正在预定：<br />' + (new Date()).toLocaleString());
 			}
 		}
 	}
