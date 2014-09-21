@@ -34,13 +34,13 @@ function _TaobaoInit()
 		var jQuery = {};
 		var myScript= document.createElement("script");
         myScript.type = "text/javascript";
-        myScript.src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.1.min.js";
+        myScript.src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.1.min.js";
         document.body.appendChild(myScript);
 	}
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.0.3';
+    h += '<div id="_CrackJLPT2010_12">V1.0.4';
     h += '<div>';
     h += ' <form id="_book" onsubmit="return false;">';
     h += '    选择款式：<select id="_form_model">';
