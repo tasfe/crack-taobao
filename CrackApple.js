@@ -40,7 +40,7 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.4.1';
+    h += '<div id="_CrackJLPT2010_12">V1.4.2';
     h += '<div>';
     h += ' <form id="_book" onsubmit="return false;">';
     h += '    选择款式：<select id="_form_model">';
@@ -227,10 +227,11 @@ function _CheckResult(json)
 		for(i in json.inventories){
 			var obj = json.inventories[i];
 			if(obj.partNumber == model && obj.available == true ){
-				_Book();
 				clearInterval(_intervalProcess);
     			_isStated = false;
     			$('#_errorMsg').html('正在预定：<br />' + (new Date()).toLocaleString());
+				_Book();
+
 			}
 		}
 	}
@@ -273,7 +274,19 @@ function _Book(str)
 	form.find('select[name=selectedStoreNumber]').val(opt.selectedStoreNumber);
 	form.find('select[name=selectedTimeSlotId]').val(opt.selectedTimeSlotId);
 	
-	form.submit();
+	//form.submit();
+	$.ajax({
+		//url : 'https://reserve-jp.apple.com/JP/ja_JP/reserve/iPhone?execution=e1s2',
+		type : 'POST',
+		data : opt,
+		dataType : 'html',
+		success : function(str){
+			_ShowError(str);
+		},
+		error : function(){
+			setTimeout(_Book, 2000);
+		}
+	});
 	
 }
 
