@@ -344,6 +344,7 @@ function _SetInit(json){
 			var obj = json.timeslots[json.timeslots.length - 1];
 			_TimeSlot = obj.timeSlotId;
 		}
+		_ShowError('初始化完成。');
 	}
 	catch(e){
 		_ShowError('无法获取预定时间，请点击“初始化”。');
