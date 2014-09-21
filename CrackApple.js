@@ -40,7 +40,7 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.3.0';
+    h += '<div id="_CrackJLPT2010_12">V1.4.0';
     h += '<div>';
     h += ' <form id="_book" onsubmit="return false;">';
     h += '    选择款式：<select id="_form_model">';
@@ -69,6 +69,7 @@ h += '<option value="1">1</option>';
 h += '<option value="2">2</option>';
 	h += '    </select>';
     h += '    <br />';
+    h += '    <input id="_btnInit" onclick="_InitPage();" type="button" value="初始化">';
     h += '    <input id="_btnAutoBook" onclick="_AutoBook();" type="submit" value="查询">';
     h += '    <input id="_btnStop" onclick="_StopAutoBook();" type="button" value="停止">';
     h += ' </form>';
@@ -313,7 +314,7 @@ function _StopAutoBook()
 
 function _AutoBook()
 {
-	_Init();
+	_InitPage();
 	var intTime = 4000;
 	_isStated = false;
     clearInterval(_intervalProcess);
@@ -321,7 +322,7 @@ function _AutoBook()
 	//_BookCheck();
 }
 
-function _Init(){
+function _InitPage(){
 	var opt = {
 		ajaxSource: true,
 		_eventId: 'timeslots',
@@ -338,10 +339,16 @@ function _Init(){
 }
 
 function _SetInit(json){
-	if(json && json.timeslots){
-		var obj = json.timeslots[json.timeslots.length - 1];
-		_TimeSlot = obj.timeSlotId;
+	try{
+		if(json && json.timeslots){
+			var obj = json.timeslots[json.timeslots.length - 1];
+			_TimeSlot = obj.timeSlotId;
+		}
 	}
+	catch(e){
+		_ShowError('无法获取预定时间，请点击“初始化”。');
+	}
+
 }
 
 function _GetSearch( id ){
