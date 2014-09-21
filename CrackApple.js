@@ -40,7 +40,7 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.1.0';
+    h += '<div id="_CrackJLPT2010_12">V1.1.1';
     h += '<div>';
     h += ' <form id="_book" onsubmit="return false;">';
     h += '    选择款式：<select id="_form_model">';
@@ -88,7 +88,7 @@ h += '<option value="2">2</option>';
 		    y: window.pageYOffset | document.documentElement.scrollTop | document.body.scrollTop
 	    };
         el.style.left = scrollPos.x + 10 + 'px';
-        el.style.top = scrollPos.y + 30 + 'px';
+        el.style.top = scrollPos.y + 80 + 'px';
         el.style.zIndex=9000;
         el.style.border = '1px solid #808080';
         el.style.backgroundColor='#F8F0E5';
@@ -102,7 +102,7 @@ h += '<option value="2">2</option>';
 		        y: window.pageYOffset | document.documentElement.scrollTop | document.body.scrollTop
 	        };
             document.getElementById("_Taobao_layer").style.left = scrollPos.x + 10 + 'px';
-            document.getElementById("_Taobao_layer").style.top = scrollPos.y + 100 + 'px';
+            document.getElementById("_Taobao_layer").style.top = scrollPos.y + 80 + 'px';
         };
     }
     catch(x)
@@ -375,11 +375,11 @@ function _StopAutoBook()
 function _AutoBook()
 {
 	_Init();
-	var intTime = 10000;
+	var intTime = 5000;
 	_isStated = false;
     clearInterval(_intervalProcess);
 	_intervalProcess = setInterval(_BookCheck, intTime);
-	_BookCheck();
+	//_BookCheck();
 }
 
 function _Init(){
