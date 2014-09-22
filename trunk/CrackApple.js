@@ -40,9 +40,9 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.5.0';
+    h += '<div id="_CrackJLPT2010_12">V1.5.1';
     h += '<div>';
-    h += ' <form id="_book" target="_blank">';
+    h += ' <form id="_book" target="_blank" method="post">';
     h += '    选择款式：<select id="_form_model" name="selectedPartNumber">';
 h += '<option value="MG482J/A">iPhone 6 银 16G</option>';
 h += '<option value="MG4H2J/A">iPhone 6 银 64G</option>';
@@ -78,7 +78,7 @@ h += '<option value="MGAC2J/A">iPhone 6 Plus 灰 128G</option>';
     h += '	电话：<input type="text" name="phoneNumber" value="080-4221-3543" /><br />';
     h += '	<input type="hidden" name="product" value="" />';
     h += '	<input type="hidden" name="selectedContractType" value="UNLOCKED" />';
-    h += '	<input type="hidden" name="selectedStoreNumber" value="" />';
+    h += '	<input type="hidden" name="selectedStoreNumber" value="R005" />';
     h += '	<input type="hidden" name="selectedTimeSlotId" value="" />';
     h += '    <input id="_btnInit" onclick="_InitPage();" type="button" value="初始化">';
     h += '    <input id="_btnAutoBook" onclick="_Book();" type="submit" value="订购"><br />';
@@ -359,7 +359,10 @@ function _InitPage(){
 		type : 'POST',
 		data : opt,
 		dataType : 'json',
-		success : _SetInit
+		success : _SetInit,
+		error : function(){
+			_ShowError("无法初始化");
+		}
 	});
 }
 
