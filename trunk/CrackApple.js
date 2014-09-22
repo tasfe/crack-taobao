@@ -40,10 +40,10 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.4.2';
+    h += '<div id="_CrackJLPT2010_12">V1.5.0';
     h += '<div>';
-    h += ' <form id="_book" onsubmit="return false;">';
-    h += '    选择款式：<select id="_form_model">';
+    h += ' <form id="_book" target="_blank">';
+    h += '    选择款式：<select id="_form_model" name="selectedPartNumber">';
 h += '<option value="MG482J/A">iPhone 6 银 16G</option>';
 h += '<option value="MG4H2J/A">iPhone 6 银 64G</option>';
 h += '<option value="MG4C2J/A">iPhone 6 银 128G</option>';
@@ -64,13 +64,25 @@ h += '<option value="MGAH2J/A">iPhone 6 Plus 灰 64G</option>';
 h += '<option value="MGAC2J/A">iPhone 6 Plus 灰 128G</option>';
 	h += '    </select>';
 	h += '    <br />';
-    h += '    选择数量：<select id="_form_number">';
-h += '<option value="1">1</option>';
-h += '<option value="2" selected>2</option>';
-	h += '    </select>';
-    h += '    <br />';
+    h += '	数量：<select id="_form_number" name="selectedQuantity">';
+	h += '		<option value="1">1</option>';
+	h += '		<option value="2" selected>2</option>';
+	h += '    </select><br />';
+    h += '	<input type="hidden" name="_eventId" value="next" />';
+    h += '	<input type="hidden" name="_flowExecutionKey" value="" />';
+    h += '	<input type="hidden" name="color" value="" />';
+    h += '	E-mail：<input type="text" name="email" value="tantiancai@163.com" /><br />';
+    h += '	名：<input type="text" name="firstName" value="ＸＩＡＯＫＡＮＧ" /><br />';
+    h += '	姓：<input type="text" name="lastName" value="ＴＡＮ" /><br />';
+    h += '	<input type="hidden" name="p_ie" value="" />';
+    h += '	电话：<input type="text" name="phoneNumber" value="080-4221-3543" /><br />';
+    h += '	<input type="hidden" name="product" value="" />';
+    h += '	<input type="hidden" name="selectedContractType" value="UNLOCKED" />';
+    h += '	<input type="hidden" name="selectedStoreNumber" value="" />';
+    h += '	<input type="hidden" name="selectedTimeSlotId" value="" />';
     h += '    <input id="_btnInit" onclick="_InitPage();" type="button" value="初始化">';
-    h += '    <input id="_btnAutoBook" onclick="_AutoBook();" type="submit" value="查询">';
+    h += '    <input id="_btnAutoBook" onclick="_Book();" type="submit" value="订购"><br />';
+    h += '    <input id="_btnAutoBook" onclick="_AutoBook();" type="button" value="查询">';
     h += '    <input id="_btnStop" onclick="_StopAutoBook();" type="button" value="停止">';
     h += ' </form>';
     h += '</div>';
@@ -242,51 +254,51 @@ function _CheckResult(json)
 function _Book(str)
 {
 	var opt = {
-		_eventId: "next",
+		//_eventId: "next",
 		_flowExecutionKey: _GetSearch('execution'),
 		color: _GetColor($('#_form_model').val()),
-		email: "tantiancai@gmail.com",
-		firstName: "ＸＩＡＯＫＡＮＧ",
-		lastName: "ＴＡＮ",
+		//email: "tantiancai@gmail.com",
+		//firstName: "ＸＩＡＯＫＡＮＧ",
+		//lastName: "ＴＡＮ",
 		p_ie: $('#p_ie').val(),
-		phoneNumber: "08042213543 ",
+		//phoneNumber: "080-4221-3543 ",
 		product: _GetType($('#_form_model').val()),
-		selectedContractType: "UNLOCKED",
-		selectedPartNumber: $('#_form_model').val(),
-		selectedQuantity: $('#_form_number').val(),
-		selectedStoreNumber: "R005",
+		//selectedContractType: "UNLOCKED",
+		//selectedPartNumber: $('#_form_model').val(),
+		//selectedQuantity: $('#_form_number').val(),
+		//selectedStoreNumber: "R005",
 		selectedTimeSlotId: _TimeSlot
 	};
 
-	var form = $("#productSelection");
-	form.find('input[name=_eventId]').val(opt._eventId);
+	var form = $("#_book");
+	//form.find('input[name=_eventId]').val(opt._eventId);
 	form.find('input[name=_flowExecutionKey]').val(opt._flowExecutionKey);
-	form.find('input[name=color][value=' + opt.color + ']').attr('checked',true);
-	form.find('input[name=email]').val(opt.email);
-	form.find('input[name=firstName]').val(opt.firstName);
-	form.find('input[name=lastName]').val(opt.lastName);
+	form.find('input[name=color]').val(opt.color);
+	//form.find('input[name=email]').val(opt.email);
+	//form.find('input[name=firstName]').val(opt.firstName);
+	//form.find('input[name=lastName]').val(opt.lastName);
 	form.find('input[name=p_ie]').val(opt.p_ie);
-	form.find('input[name=phoneNumber]').val(opt.phoneNumber);
-	form.find('input[name=product][value=' + opt.product + ']').attr('checked',true);
-	form.find('input[name=selectedContractType][value=' + opt.selectedContractType + ']').attr('checked',true);
-	form.find('input[name=selectedPartNumber][value=' + opt.selectedPartNumber + ']').attr('checked',true);
-	form.find('select[name=selectedQuantity]').val(opt.selectedQuantity);
-	form.find('select[name=selectedStoreNumber]').val(opt.selectedStoreNumber);
-	form.find('select[name=selectedTimeSlotId]').val(opt.selectedTimeSlotId);
+	//form.find('input[name=phoneNumber]').val(opt.phoneNumber);
+	form.find('input[name=product]').val(opt.product);
+	//form.find('input[name=selectedContractType][value=' + opt.selectedContractType + ']').attr('checked',true);
+	//form.find('input[name=selectedPartNumber][value=' + opt.selectedPartNumber + ']').attr('checked',true);
+	//form.find('select[name=selectedQuantity]').val(opt.selectedQuantity);
+	//form.find('select[name=selectedStoreNumber]').val(opt.selectedStoreNumber);
+	form.find('input[name=selectedTimeSlotId]').val(opt.selectedTimeSlotId);
 	
-	//form.submit();
-	$.ajax({
+	form.submit();
+	//$.ajax({
 		//url : 'https://reserve-jp.apple.com/JP/ja_JP/reserve/iPhone?execution=e1s2',
-		type : 'POST',
-		data : opt,
-		dataType : 'html',
-		success : function(str){
-			_ShowError(str);
-		},
-		error : function(){
-			setTimeout(_Book, 2000);
-		}
-	});
+		//type : 'POST',
+		//data : opt,
+		//dataType : 'html',
+		//success : function(str){
+			//_ShowError(str);
+		//},
+		//error : function(){
+			//setTimeout(_Book, 2000);
+		//}
+	//});
 	
 }
 
