@@ -5,7 +5,6 @@ var _intervalProcess;
 var _isStated = false;
 var _isError = false;
 var _xmlhttp;
-var _itemInfo;
 var _TimeSlot;
 var _Define = [{model:'MG482J/A',	color:'シルバー',	type:'iPhone 6',	request:'MG482J/A,MG4C2J/A,MG4H2J/A'},
 {model:'MG4H2J/A',	color:'シルバー',	type:'iPhone 6',	request:'MG482J/A,MG4C2J/A,MG4H2J/A'},
@@ -25,8 +24,7 @@ var _Define = [{model:'MG482J/A',	color:'シルバー',	type:'iPhone 6',	request
 {model:'MGA82J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	request:'MGAH2J/A,MGAC2J/A,MGA82J/A'},
 {model:'MGAH2J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	request:'MGAH2J/A,MGAC2J/A,MGA82J/A'},
 {model:'MGAC2J/A',	color:'スペースグレイ',	type:'iPhone 6 Plus',	request:'MGAH2J/A,MGAC2J/A,MGA82J/A'}];
-var _skus = new Array();
-var _ra_id = _GetSearch('ra_id');
+
 
 function _TaobaoInit()
 {
@@ -40,14 +38,14 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.5.1';
+    h += '<div id="_CrackJLPT2010_12">V1.5.2';
     h += '<div>';
     h += ' <form id="_book" target="_blank" method="post">';
     h += '    选择款式：<select id="_form_model" name="selectedPartNumber">';
 h += '<option value="MG482J/A">iPhone 6 银 16G</option>';
 h += '<option value="MG4H2J/A">iPhone 6 银 64G</option>';
 h += '<option value="MG4C2J/A">iPhone 6 银 128G</option>';
-h += '<option value="MG492J/A" selected>iPhone 6 金 16G</option>';
+h += '<option value="MG492J/A">iPhone 6 金 16G</option>';
 h += '<option value="MG4J2J/A">iPhone 6 金 64G</option>';
 h += '<option value="MG4E2J/A">iPhone 6 金 128G</option>';
 h += '<option value="MG472J/A">iPhone 6 灰 16G</option>';
@@ -57,7 +55,7 @@ h += '<option value="MGA92J/A">iPhone 6 Plus 银 16G</option>';
 h += '<option value="MGAJ2J/A">iPhone 6 Plus 银 64G</option>';
 h += '<option value="MGAE2J/A">iPhone 6 Plus 银 128G</option>';
 h += '<option value="MGAA2J/A">iPhone 6 Plus 金 16G</option>';
-h += '<option value="MGAK2J/A">iPhone 6 Plus 金 64G</option>';
+h += '<option value="MGAK2J/A" selected>iPhone 6 Plus 金 64G</option>';
 h += '<option value="MGAF2J/A">iPhone 6 Plus 金 128G</option>';
 h += '<option value="MGA82J/A">iPhone 6 Plus 灰 16G</option>';
 h += '<option value="MGAH2J/A">iPhone 6 Plus 灰 64G</option>';
