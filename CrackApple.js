@@ -38,7 +38,7 @@ function _TaobaoInit()
     var agt = navigator.userAgent.toLowerCase();
     _Taobao_is_ie = (agt.indexOf("msie")!=-1 && document.all);
     var h = '';
-    h += '<div id="_CrackJLPT2010_12">V1.5.2';
+    h += '<div id="_CrackJLPT2010_12">V1.5.3';
     h += '<div>';
     h += ' <form id="_book" target="_blank" method="post">';
     h += '    选择款式：<select id="_form_model" name="selectedPartNumber">';
@@ -69,9 +69,9 @@ h += '<option value="MGAC2J/A">iPhone 6 Plus 灰 128G</option>';
     h += '	<input type="hidden" name="_eventId" value="next" />';
     h += '	<input type="hidden" name="_flowExecutionKey" value="" />';
     h += '	<input type="hidden" name="color" value="" />';
-    h += '	E-mail：<input type="text" name="email" value="tantiancai@163.com" /><br />';
-    h += '	名：<input type="text" name="firstName" value="ＸＩＡＯＫＡＮＧ" /><br />';
-    h += '	姓：<input type="text" name="lastName" value="ＴＡＮ" /><br />';
+    h += '	E-mail：<input type="text" name="email" value="xubinwx@163.com" /><br />';
+    h += '	名：<input type="text" name="firstName" value="BIN" /><br />';
+    h += '	姓：<input type="text" name="lastName" value="XU" /><br />';
     h += '	<input type="hidden" name="p_ie" value="" />';
     h += '	电话：<input type="text" name="phoneNumber" value="080-4221-3543" /><br />';
     h += '	<input type="hidden" name="product" value="" />';
@@ -80,8 +80,8 @@ h += '<option value="MGAC2J/A">iPhone 6 Plus 灰 128G</option>';
     h += '	<input type="hidden" name="selectedTimeSlotId" value="" />';
     h += '    <input id="_btnInit" onclick="_InitPage();" type="button" value="初始化">';
     h += '    <input id="_btnAutoBook" onclick="_Book();" type="submit" value="订购"><br />';
-    h += '    <input id="_btnAutoBook" onclick="_AutoBook();" type="button" value="查询">';
-    h += '    <input id="_btnStop" onclick="_StopAutoBook();" type="button" value="停止">';
+    //h += '    <input id="_btnAutoBook" onclick="_AutoBook();" type="button" value="查询">';
+    //h += '    <input id="_btnStop" onclick="_StopAutoBook();" type="button" value="停止">';
     h += ' </form>';
     h += '</div>';
     h += '<div id="_msg">';
@@ -427,4 +427,4 @@ else
 
 //javascript:void((function(){var element=document.createElement('script');element.setAttribute('src','https://crack-taobao.googlecode.com/svn/trunk/CrackApple.js?t='+Math.random());document.body.appendChild(element);})())
 
-//javascript:void((function(){var element=document.createElement('script');element.setAttribute('src','http://www.muyingtuijian.com/js/CrackApple.js?t='+Math.random());document.body.appendChild(element);})())
+//javascript:void((function(){var element=document.createElement('script');element.setAttribute('src','file://Tantiancai-PC/share/CrackApple.js?t='+Math.random());document.body.appendChild(element);})())
