@@ -45,7 +45,7 @@ function _TaobaoInit()
 h += '<option value="MG482J/A">iPhone 6 银 16G</option>';
 h += '<option value="MG4H2J/A">iPhone 6 银 64G</option>';
 h += '<option value="MG4C2J/A">iPhone 6 银 128G</option>';
-h += '<option value="MG492J/A" selected>iPhone 6 金 16G</option>';
+h += '<option value="MG492J/A">iPhone 6 金 16G</option>';
 h += '<option value="MG4J2J/A">iPhone 6 金 64G</option>';
 h += '<option value="MG4E2J/A">iPhone 6 金 128G</option>';
 h += '<option value="MG472J/A">iPhone 6 灰 16G</option>';
@@ -55,7 +55,7 @@ h += '<option value="MGA92J/A">iPhone 6 Plus 银 16G</option>';
 h += '<option value="MGAJ2J/A">iPhone 6 Plus 银 64G</option>';
 h += '<option value="MGAE2J/A">iPhone 6 Plus 银 128G</option>';
 h += '<option value="MGAA2J/A">iPhone 6 Plus 金 16G</option>';
-h += '<option value="MGAK2J/A">iPhone 6 Plus 金 64G</option>';
+h += '<option value="MGAK2J/A" selected>iPhone 6 Plus 金 64G</option>';
 h += '<option value="MGAF2J/A">iPhone 6 Plus 金 128G</option>';
 h += '<option value="MGA82J/A">iPhone 6 Plus 灰 16G</option>';
 h += '<option value="MGAH2J/A">iPhone 6 Plus 灰 64G</option>';
