@@ -367,7 +367,8 @@ function _InitPage(){
 function _SetInit(json){
 	try{
 		if(json && json.timeslots){
-			var obj = json.timeslots[json.timeslots.length - 1];
+			//var obj = json.timeslots[json.timeslots.length - 1];
+			var obj = json.timeslots[0];
 			_TimeSlot = obj.timeSlotId;
 		}
 		_ShowError('初始化完成。');
